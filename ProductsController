@@ -1,0 +1,42 @@
+  [Route("api/[controller]")]
+    [ApiController]
+    public class ProductsController : ControllerBase
+    {
+        private readonly SwaggerDBContext _context;
+        public ProductsController(SwaggerDBContext context)
+        {
+            _context = context;
+        }
+
+        /// <summary>
+        /// Bu endpoint tüm ürünleri list olarak geri döner
+        /// </summary>
+        /// <remarks>
+        /// <remarks>https://localhost4442/api/products</remarks>
+        /// <returns></returns>
+
+        [Produces("application/json")]
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
+        {
+            return await _context.Product.ToListAsync();
+        }
+        /// <summary>
+        /// Bu endpoint verilen id ye sahip ürünü döner
+        /// <param name="id">ürün id si</param>
+        /// </summary>
+        /// <returns></returns>
+
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<IEnumerable<Product>>> GetProduct(int id) 
+        //{
+        //    var product = await _context.Product.FindAsync(id);
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return product;
+        //}
+
+    }
